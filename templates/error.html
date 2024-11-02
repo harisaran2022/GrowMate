@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Growmate </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 50px 0;
+        }
+        .error-code {
+            font-size: 120px;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+        .error-message {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="/" class="logo">Growmate  🌱</a>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/disease-detection">Disease Detection </a></li>
+                <li><a href="/farm-management" >Farm Management </a></li>
+                <li><a href="/chatbot">AI Assistant </a></li>
+                <li><a href="/about_us">About Us </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="error-container">
+        <div class="error-code">404</div>
+        <p class="error-message">Better move out!! your on Wrong place.</p>
+        <p><a href="/">Go back to Home</a></p>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Growmate Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

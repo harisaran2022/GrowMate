@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Farming Assistant - Growmate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --primary-dark: #3d8c40;
+            --secondary-color: #00aa2b;
+            --accent-color: #E8F5E9;
+            --danger-color: #ff6b6b;
+            --white: #ffffff;
+            --text-color: #333333;
+            --bg-color: #f4f4f9;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+        }
+
+        /* Enhanced Navigation */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            color: var(--primary-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content Area */
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .content {
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background-color: var(--accent-color);
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .content-header h1 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .intro {
+            color: var(--text-color);
+            max-width: 800px;
+        }
+
+        /* Enhanced Chat Container */
+        .chat-container {
+            padding: 2rem;
+        }
+
+        .chat-messages {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            background-color: var(--bg-color);
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            word-wrap: break-word;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .user-message {
+            background-color: var(--primary-color);
+            color: var(--white);
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+        }
+
+        .bot-message {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            margin-right: auto;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 1rem;
+            background-color: var(--white);
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .chat-input button {
+            padding: 1rem 2rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .chat-input button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--white);
+            padding: 2rem 0;
+            border-top: 2px solid var(--accent-color);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        /* Scrollbar Styling */
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">Growmate 🌱</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/disease-detection">Disease Detection </a></li>
+                <li><a href="/farm-management" >Farm Management </a></li>
+                <li><a href="/chatbot"class="active">AI Assistant </a></li>
+                <li><a href="/about_us">About Us </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="content">
+            <div class="content-header">
+                <h1>AI-Powered Farming Assistant</h1>
+                <p class="intro">Get instant answers to your farming questions! Our AI assistant is always here to help, whether you need advice on crop care, disease prevention, or farm management tips.</p>
+            </div>
+            
+            <div class="chat-container">
+                <div id="chatMessages" class="chat-messages"></div>
+                <form id="chatForm" class="chat-input">
+                    <input type="text" id="userInput" placeholder="Type your farming question here..." required>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Growmate. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        const chatForm = document.getElementById('chatForm');
+        const chatMessages = document.getElementById('chatMessages');
+        const userInput = document.getElementById('userInput');
+
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const message = userInput.value.trim();
+            if (message) {
+                addMessage('user', message);
+                fetchBotReply(message);
+                userInput.value = '';
+            }
+        });
+
+        function addMessage(sender, text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', `${sender}-message`);
+            messageDiv.innerHTML = marked.parse(text);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function fetchBotReply(message) {
+            fetch('/chatbot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `message=${encodeURIComponent(message)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                addMessage('bot', data.response);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                addMessage('bot', 'Sorry, I encountered an error while processing your request.');
+            });
+        }
+    </script>
+</body>
+</html>
