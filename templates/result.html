@@ -5,165 +5,245 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Growmate - Results</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #4CAF50;
-            --primary-dark: #3d8c40;
-            --secondary-color: #81C784;
-            --accent-color: #E8F5E9;
-            --danger-color: #ff6b6b;
+            --brand-green: #2EA043;
+            --dark-green: #216E2E;
+            --light-green: #3FB950;
+            --accent-green: #DAFBE1;
+            --black: #1B1F24;
+            --dark-gray: #2D333B;
+            --light-gray: #F6F8FA;
             --white: #ffffff;
-            --text-color: #333333;
-            --bg-color: #f4f4f9;
-            --border-color: #e0e0e0;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
             --container-width: 1200px;
         }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
-        /* Navbar Styles */
-        nav {
-            background-color: var(--white);
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: var(--black);
             box-shadow: var(--shadow);
-            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0.8rem 0;
         }
 
-        .container {
+        .nav-container {
             max-width: var(--container-width);
             margin: 0 auto;
-            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+            position: relative;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--white);
             text-decoration: none;
-        }
-
-        ul {
-            list-style: none;
             display: flex;
-            justify-content: flex-end;
-            gap: 2rem;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        ul li a {
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
             text-decoration: none;
-            color: var(--text-color);
+            color: var(--white);
             font-weight: 500;
-            transition: var(--transition);
             padding: 0.5rem 1rem;
             border-radius: 6px;
+            transition: var(--transition);
         }
 
-        ul li a:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: var(--brand-green);
+            color: var(--white);
         }
 
-        /* Main Content Styles */
-        main {
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1001;
+        }
+
+        .nav-toggle div {
+            width: 30px;
+            height: 2px;
+            background: var(--white);
+            transition: var(--transition);
+        }
+
+        .results-container {
             max-width: 800px;
             margin: 120px auto 2rem;
             padding: 2rem;
             background-color: var(--white);
             border-radius: 12px;
             box-shadow: var(--shadow);
+        }
+
+        .results-title {
+            font-size: 2rem;
             text-align: center;
-        }
-
-        h1 {
-            color: var(--primary-color);
             margin-bottom: 1rem;
+            color: var(--brand-green);
         }
 
-        img {
+        .results-description {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+        }
+
+        .results img {
             max-width: 300px;
             margin-top: 20px;
             border-radius: 8px;
             box-shadow: var(--shadow);
         }
 
-        p {
+        .results p {
             margin: 1rem 0;
             font-size: 1.1rem;
         }
 
-        /* Markdown Content Styles */
         .markdown-content {
             text-align: left;
             margin-top: 2rem;
             padding: 1rem;
-            background-color: var(--accent-color);
+            background-color: var(--accent-green);
             border-radius: 8px;
             box-shadow: var(--shadow);
         }
 
-        /* Footer */
         footer {
-            background-color: var(--white);
+            background: var(--black);
+            color: var(--white);
             padding: 2rem 0;
             margin-top: 4rem;
-            border-top: 1px solid var(--border-color);
         }
 
-        footer p {
+        .footer-content {
+            max-width: var(--container-width);
+            margin: 0 auto;
             text-align: center;
-            color: var(--text-color);
+            padding: 0 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
-            ul {
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--black);
+                padding: 1rem;
                 flex-direction: column;
                 align-items: center;
+                border-radius: 0 0 8px 8px;
+                box-shadow: var(--shadow);
             }
 
-            ul li {
-                margin-bottom: 0.5rem;
+            .nav-links.show {
+                display: flex;
             }
 
-            main {
+            .nav-toggle.active div:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+            }
+
+            .nav-toggle.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active div:nth-child(3) {
+                transform: rotate(-45deg) translate(8px, -8px);
+            }
+
+            .results-container {
+                margin: 100px 1rem 2rem;
                 padding: 1rem;
             }
 
-            h1 {
+            .results-title {
                 font-size: 1.5rem;
             }
 
-            p {
+            .results-description {
                 font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .results-title {
+                font-size: 1.25rem;
+            }
+
+            .results-description {
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <a href="/" class="logo">Growmate 🌱</a>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/disease-detection"class="active">Disease Detection </a></li>
-                <li><a href="/farm-management" >Farm Management </a></li>
-                <li><a href="/chatbot">AI Assistant </a></li>
-                <li><a href="/about_us">About Us </a></li>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">Growmate.ai 🌱</a>
+            <div class="nav-toggle" onclick="toggleNav(this)">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/disease-detection">Disease Detection</a></li>
+                <li><a href="/farm-management">Farm Management</a></li>
+                <li><a href="/chatbot">AI Assistant</a></li>
+                <li><a href="/about_us">About Us</a></li>
             </ul>
         </div>
     </nav>
 
-    <main class="container">
-        <h1>{{ page_title }}</h1>
+    <main class="results-container">
+        <h1 class="results-title">{{ page_title }}</h1>
         {% if image_url %}
         <img src="{{ image_url }}" alt="Uploaded Image">
         {% endif %}
@@ -186,9 +266,17 @@
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Growmate. All rights reserved.</p>
+        <div class="footer-content">
+            <p>&copy; 2024 Growmate - Your AI Partner for Sustainable Agriculture 🌱</p>
         </div>
     </footer>
+
+    <script>
+        function toggleNav(element) {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('show');
+            element.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
