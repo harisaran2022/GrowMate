@@ -5,64 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant Disease Detection - Growmate</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #4CAF50;
-            --primary-dark: #3d8c40;
-            --secondary-color: #81C784;
-            --accent-color: #E8F5E9;
-            --danger-color: #ff6b6b;
+            --brand-green: #2EA043;
+            --dark-green: #216E2E;
+            --light-green: #3FB950;
+            --accent-green: #DAFBE1;
+            --black: #1B1F24;
+            --dark-gray: #2D333B;
+            --light-gray: #F6F8FA;
             --white: #ffffff;
-            --text-color: #333333;
-            --bg-color: #f4f4f9;
-            --border-color: #e0e0e0;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
             --container-width: 1200px;
         }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+        * {
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
-        main {
-            flex: 1;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--black);
+            line-height: 1.6;
         }
 
-        /* Navbar Styles */
         .navbar {
+            background: var(--black);
+            box-shadow: var(--shadow);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background-color: var(--white);
-            box-shadow: var(--shadow);
             z-index: 1000;
-            padding: 1rem 0;
+            padding: 0.8rem 0;
         }
 
         .nav-container {
             max-width: var(--container-width);
             margin: 0 auto;
-            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 1.5rem;
+            position: relative;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--white);
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -71,26 +68,41 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-color);
+            color: var(--white);
             font-weight: 500;
-            transition: var(--transition);
             padding: 0.5rem 1rem;
             border-radius: 6px;
+            transition: var(--transition);
         }
 
         .nav-links a:hover,
         .nav-links a.active {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
+            background: var(--brand-green);
+            color: var(--white);
         }
 
-        /* Upload Container Styles */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1001;
+        }
+
+        .nav-toggle div {
+            width: 30px;
+            height: 2px;
+            background: var(--white);
+            transition: var(--transition);
+        }
+
         .upload-container {
             max-width: 800px;
             margin: 120px auto 2rem;
@@ -104,45 +116,45 @@
             font-size: 2rem;
             text-align: center;
             margin-bottom: 1rem;
-            color: var(--primary-color);
+            color: var(--brand-green);
         }
 
         .upload-description {
             text-align: center;
             margin-bottom: 2rem;
-            color: var(--text-color);
+            color: var(--dark-gray);
             font-size: 1.1rem;
         }
 
         .upload-area {
-            border: 2px dashed var(--border-color);
+            border: 2px dashed var(--dark-gray);
             border-radius: 12px;
             padding: 3rem 2rem;
             text-align: center;
             margin-bottom: 2rem;
             transition: var(--transition);
             cursor: pointer;
-            background-color: var(--accent-color);
+            background-color: var(--accent-green);
             position: relative;
             overflow: hidden;
         }
 
         .upload-area:hover {
-            border-color: var(--primary-color);
-            background-color: var(--accent-color);
+            border-color: var(--brand-green);
+            background-color: var(--accent-green);
             transform: translateY(-2px);
         }
 
         .upload-icon {
             font-size: 4rem;
-            color: var(--primary-color);
+            color: var(--brand-green);
             margin-bottom: 1rem;
         }
 
         .upload-button {
             display: inline-block;
             padding: 0.75rem 1.5rem;
-            background-color: var(--primary-color);
+            background-color: var(--brand-green);
             color: var(--white);
             border: none;
             border-radius: 6px;
@@ -154,42 +166,20 @@
         }
 
         .upload-button:hover {
-            background-color: var(--primary-dark);
+            background-color: var(--dark-green);
             transform: translateY(-1px);
         }
 
         .upload-button:disabled {
-            background-color: var(--border-color);
+            background-color: var(--dark-gray);
             cursor: not-allowed;
         }
 
-        /* Loading State */
-        .loading {
-            display: none;
-            text-align: center;
-            margin-top: 2rem;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid var(--accent-color);
-            border-top-color: var(--primary-color);
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Results Section */
         .results {
             display: none;
             margin-top: 2rem;
             padding: 2rem;
-            background-color: var(--accent-color);
+            background-color: var(--accent-green);
             border-radius: 12px;
             animation: fadeIn 0.3s ease-in;
         }
@@ -200,7 +190,7 @@
         }
 
         .results h3 {
-            color: var(--primary-color);
+            color: var(--brand-green);
             margin-bottom: 1.5rem;
             font-size: 1.5rem;
         }
@@ -223,42 +213,66 @@
 
         .result-name {
             font-weight: 500;
-            color: var(--text-color);
+            color: var(--dark-gray);
         }
 
         .result-confidence {
-            background-color: var(--primary-color);
+            background-color: var(--brand-green);
             color: var(--white);
             padding: 0.25rem 0.75rem;
             border-radius: 20px;
             font-size: 0.9rem;
         }
 
-        /* Footer */
-        .footer {
-            background-color: var(--white);
+        footer {
+            background: var(--black);
+            color: var(--white);
             padding: 2rem 0;
-            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
         }
 
         .footer-content {
             max-width: var(--container-width);
             margin: 0 auto;
             text-align: center;
-            color: var(--text-color);
+            padding: 0 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
+            .nav-toggle {
+                display: flex;
             }
 
             .nav-links {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--black);
+                padding: 1rem;
+                flex-direction: column;
+                align-items: center;
+                border-radius: 0 0 8px 8px;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-toggle.active div:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+            }
+
+            .nav-toggle.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active div:nth-child(3) {
+                transform: rotate(-45deg) translate(8px, -8px);
             }
 
             .upload-container {
@@ -274,18 +288,33 @@
                 font-size: 1rem;
             }
         }
+
+        @media (max-width: 480px) {
+            .upload-title {
+                font-size: 1.25rem;
+            }
+
+            .upload-description {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="logo">Growmate 🌱</a>
+            <a href="/" class="logo">Growmate.ai 🌱</a>
+            <div class="nav-toggle" onclick="toggleNav(this)">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
             <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/disease-detection"class="active">Disease Detection </a></li>
-                <li><a href="/farm-management" >Farm Management </a></li>
-                <li><a href="/chatbot">AI Assistant </a></li>
-                <li><a href="/about_us">About Us </a></li>
+                <li><a href="/" >Home</a></li>
+                <li><a href="/disease-detection"class="active">Disease Detection</a></li>
+                <li><a href="/farm-management">Farm Management</a></li>
+                <li><a href="/chatbot">AI Assistant</a></li>
+                <li><a href="/about_us">About Us</a></li>
             </ul>
         </div>
     </nav>
@@ -317,10 +346,18 @@
         {% endif %}
     </main>
 
-    <footer class="footer">
+    <footer>
         <div class="footer-content">
-            <p>&copy; 2024 Growmate. All rights reserved.</p>
+            <p>&copy; 2024 Growmate - Your AI Partner for Sustainable Agriculture 🌱</p>
         </div>
     </footer>
+
+    <script>
+        function toggleNav(element) {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('show');
+            element.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
