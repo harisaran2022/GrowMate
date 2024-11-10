@@ -8,69 +8,62 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #4CAF50;
-            --primary-dark: #3d8c40;
-            --secondary-color: #81C784;
-            --accent-color: #E8F5E9;
-            --danger-color: #ff6b6b;
+            --brand-green: #2EA043;
+            --dark-green: #216E2E;
+            --light-green: #3FB950;
+            --accent-green: #DAFBE1;
+            --black: #1B1F24;
+            --dark-gray: #2D333B;
+            --light-gray: #F6F8FA;
             --white: #ffffff;
-            --text-color: #333333;
-            --bg-color: #f4f4f9;
-            --border-color: #e0e0e0;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s ease;
+            --container-width: 1200px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--light-gray);
+            color: var(--black);
             line-height: 1.6;
-            min-height: 100vh;
-            display: grid;
-            grid-template-rows: auto 1fr auto;
         }
 
         .navbar {
-            background-color: var(--white);
+            background: var(--black);
             box-shadow: var(--shadow);
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 2px solid var(--accent-color);
+            padding: 0.8rem 0;
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: var(--container-width);
             margin: 0 auto;
-            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 1.5rem;
+            position: relative;
         }
 
         .logo {
             font-size: 1.75rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--white);
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            transition: var(--transition);
-        }
-
-        .logo:hover {
-            color: var(--primary-dark);
-            transform: scale(1.05);
         }
 
         .nav-links {
@@ -80,70 +73,78 @@
         }
 
         .nav-links a {
-            color: var(--text-color);
             text-decoration: none;
+            color: var(--white);
             font-weight: 500;
-            padding: 0.75rem 1.25rem;
-            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
             transition: var(--transition);
         }
 
         .nav-links a:hover,
         .nav-links a.active {
-            background-color: var(--primary-color);
+            background: var(--brand-green);
             color: var(--white);
-            transform: translateY(-2px);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1001;
+        }
+
+        .nav-toggle div {
+            width: 30px;
+            height: 2px;
+            background: var(--white);
+            transition: var(--transition);
         }
 
         .hero {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            color: var(--white);
-            padding: 6rem 0;
+            margin-top: 76px;
+            min-height: 50vh;
+            background: linear-gradient(rgba(27, 31, 36, 0.8), rgba(46, 160, 67, 0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            color: var(--white);
+            padding: 2rem;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-            animation: rotate 30s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .hero-content {
+            max-width: 800px;
+            background: rgba(27, 31, 36, 0.8);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
+            line-height: 1.2;
         }
 
         .hero p {
             font-size: 1.25rem;
+            margin-bottom: 2.5rem;
             opacity: 0.9;
-            position: relative;
-            z-index: 1;
         }
 
         .main-container {
-            max-width: 1200px;
+            max-width: var(--container-width);
             margin: 3rem auto;
-            padding: 0 2rem;
+            padding: 0 1.5rem;
         }
 
         .section {
             background-color: var(--white);
             border-radius: 16px;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--shadow);
             padding: 2.5rem;
             margin-bottom: 2.5rem;
             transition: var(--transition);
@@ -159,23 +160,23 @@
             gap: 1rem;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 2px solid var(--accent-color);
+            border-bottom: 2px solid var(--accent-green);
         }
 
         .section-header i {
-            color: var(--primary-color);
+            color: var(--brand-green);
             font-size: 1.75rem;
         }
 
         .section-header h2 {
-            color: var(--primary-dark);
+            color: var(--dark-green);
             margin: 0;
             font-size: 1.75rem;
         }
 
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2.5rem;
             padding: 1.5rem 0;
         }
@@ -186,7 +187,7 @@
             padding: 2rem;
             text-align: center;
             transition: var(--transition);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--light-green);
             position: relative;
             overflow: hidden;
         }
@@ -198,12 +199,12 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(90deg, var(--brand-green), var(--light-green));
         }
 
         .team-member:hover {
             transform: translateY(-5px);
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--shadow);
         }
 
         .team-member img {
@@ -211,23 +212,23 @@
             height: 140px;
             border-radius: 50%;
             margin-bottom: 1.5rem;
-            border: 4px solid var(--accent-color);
+            border: 4px solid var(--accent-green);
             transition: var(--transition);
         }
 
         .team-member:hover img {
             transform: scale(1.05);
-            border-color: var(--primary-color);
+            border-color: var(--brand-green);
         }
 
         .team-member h3 {
-            color: var(--primary-dark);
+            color: var(--dark-green);
             margin-bottom: 0.75rem;
             font-size: 1.25rem;
         }
 
         .team-member p {
-            color: var(--text-color);
+            color: var(--dark-gray);
             font-size: 1rem;
             margin-bottom: 1.25rem;
             opacity: 0.9;
@@ -240,42 +241,77 @@
         }
 
         .social-links a {
-            color: var(--primary-color);
+            color: var(--brand-green);
             font-size: 1.25rem;
             transition: var(--transition);
         }
 
         .social-links a:hover {
-            color: var(--primary-dark);
+            color: var(--dark-green);
             transform: translateY(-3px);
         }
 
-        .footer {
-            background-color: var(--white);
-            color: var(--text-color);
+        footer {
+            background: var(--black);
+            color: var(--white);
             padding: 2rem 0;
-            margin-top: auto;
-            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: var(--container-width);
             margin: 0 auto;
-            padding: 0 2rem;
             text-align: center;
+            padding: 0 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                gap: 1rem;
+            .nav-toggle {
+                display: flex;
             }
 
-            .hero {
-                padding: 4rem 0;
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--black);
+                padding: 1rem;
+                flex-direction: column;
+                align-items: center;
+                border-radius: 0 0 8px 8px;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-toggle.active div:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+            }
+
+            .nav-toggle.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active div:nth-child(3) {
+                transform: rotate(-45deg) translate(8px, -8px);
             }
 
             .hero h1 {
                 font-size: 2.5rem;
+            }
+
+            .hero-content {
+                padding: 2rem;
+            }
+
+            .main-container {
+                padding: 1rem;
             }
 
             .team-grid {
@@ -284,18 +320,16 @@
         }
 
         @media (max-width: 480px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-links {
-                flex-direction: column;
-                text-align: center;
-            }
-
             .hero h1 {
                 font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
             }
 
             .team-grid {
@@ -312,22 +346,29 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="/" class="logo">
-                Growmate 🌱
+                Growmate.ai 🌱
             </a>
+            <div class="nav-toggle" onclick="toggleNav(this)">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
             <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/disease-detection">Disease Detection </a></li>
-                <li><a href="/farm-management" >Farm Management </a></li>
-                <li><a href="/chatbot">AI Assistant </a></li>
-                <li><a href="/about_us" class="active">About Us </a></li>
+                <li><a href="/" >Home</a></li>
+                <li><a href="/disease-detection">Disease Detection</a></li>
+                <li><a href="/farm-management">Farm Management</a></li>
+                <li><a href="/chatbot">AI Assistant</a></li>
+                <li><a href="/about_us"class="active">About Us</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>About Growmate Solutions</h1>
-        <p>Revolutionizing Agriculture through AI Innovation</p>
-    </header>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>About Growmate Solutions</h1>
+            <p>Revolutionizing Agriculture through AI Innovation</p>
+        </div>
+    </section>
 
     <main class="main-container">
         <section class="section">
@@ -335,7 +376,7 @@
                 <i class="fas fa-seedling"></i>
                 <h2>Our Story</h2>
             </div>
-            <p>Growmate was created by a group of students passionate about solving the challenges farmers face with soil and plant health. We developed tools that provide instant support and promote learning in agriculture. By sharing knowledge and earning rewards, farmers can enhance their skills and make informed decisions. Together, we envision a thriving agricultural community dedicated to sustainability.</p>
+            <p>Growmate was created by a group of students passionate about solving the challenges farmers face with soil and plant health. We developed tools that provide instant support and promote learning in agriculture. By sharing knowledge and earning rewards, farmers can enhance their skills and make informed decisions. Together, we envision a thriving agricultural community dedicated to sustainability.</p>
         </section>
 
         <section class="section">
@@ -361,7 +402,7 @@
             </div>
             <div class="team-grid">
                 <div class="team-member">
-                    <img src="static\TeamImages\1.jpg" alt="NambuHarisaran">
+                    <img src="static/TeamImages/1.jpg" alt="NambuHarisaran">
                     <h3>NambuHarisaran</h3>
                     <p>Lead Developer and Founder</p>
                     <div class="social-links">
@@ -371,7 +412,7 @@
                     </div>
                 </div>
                 <div class="team-member">
-                    <img src="static\TeamImages\4.png" alt="Sushmaa">
+                    <img src="static/TeamImages/4.png" alt="Sushmaa">
                     <h3>Sushmaa</h3>
                     <p>Content Writer</p>
                     <div class="social-links">
@@ -379,7 +420,7 @@
                     </div>
                 </div>
                 <div class="team-member">
-                    <img src="static\TeamImages\5.jpg" alt="Rakshan">
+                    <img src="static/TeamImages/5.jpg" alt="Rakshan">
                     <h3>Rakshan</h3>
                     <p>Hardware Department</p>
                     <div class="social-links">
@@ -387,7 +428,7 @@
                     </div>
                 </div>
                 <div class="team-member">
-                    <img src="static\TeamImages\2.jpg" alt="Sujith">
+                    <img src="static/TeamImages/2.jpg" alt="Sujith">
                     <h3>Sujith</h3>
                     <p>Founder/Marketing Manager</p>
                     <div class="social-links">
@@ -396,7 +437,7 @@
                     </div>
                 </div>
                 <div class="team-member">
-                    <img src="static\TeamImages\7.jpg" alt="Varshini">
+                    <img src="static/TeamImages/7.jpg" alt="Varshini">
                     <h3>Varshini</h3>
                     <p>Speaker</p>
                     <div class="social-links">
@@ -404,15 +445,15 @@
                     </div>
                 </div>
                 <div class="team-member">
-                    <img src="static\TeamImages\8.jpg" alt="Karshini">
-                    <h3>Karsini</h3>
+                    <img src="static/TeamImages/8.jpg" alt="Karshini">
+                    <h3>Karshini</h3>
                     <p>Speaker</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="team-member">
-                    <img src="static\TeamImages\3.jpg" alt="Kumaran">
+                    <img src="static/TeamImages/3.jpg" alt="Kumaran">
                     <h3>Kumaran</h3>
                     <p>Creative Director</p>
                     <div class="social-links">
@@ -420,7 +461,7 @@
                     </div>
                 </div>
                 <div class="team-member">
-                    <img src="static\TeamImages\6.jpg" alt="Mokshitha">
+                    <img src="static/TeamImages/6.jpg" alt="Mokshitha">
                     <h3>Mokshitha</h3>
                     <p>Research and Development</p>
                     <div class="social-links">
@@ -431,10 +472,18 @@
         </section>
     </main>
 
-    <footer class="footer">
+    <footer>
         <div class="footer-content">
-            <p>&copy; 2024 Growmate Solutions. All rights reserved.</p>
+            <p>&copy; 2024 Growmate - Your AI Partner for Sustainable Agriculture 🌱</p>
         </div>
     </footer>
+
+    <script>
+        function toggleNav(element) {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('show');
+            element.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
