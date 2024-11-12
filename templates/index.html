@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Growmate - AI-Powered Farming Solutions 🌾🤖</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root {
             --brand-green: #2EA043;
@@ -121,6 +122,18 @@
             padding: 3rem;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero h1 {
@@ -145,6 +158,21 @@
             font-weight: 600;
             transition: var(--transition);
             border: 2px solid transparent;
+            animation: bounceIn 1s ease;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
         .cta-button:hover {
@@ -194,6 +222,7 @@
             text-align: center;
             transition: var(--transition);
             border: 1px solid var(--light-green);
+            animation: fadeInUp 1s ease;
         }
 
         .feature-card:hover {
@@ -207,6 +236,19 @@
             height: 80px;
             margin-bottom: 1.5rem;
             transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
         .feature-card:hover img {
@@ -224,20 +266,113 @@
             font-size: 1.1rem;
         }
 
-        footer {
-            background: var(--black);
-            color: var(--white);
-            padding: 2rem 0;
-            margin-top: 4rem;
+        .testimonial {
+            background-color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-radius: 16px;
+            margin-bottom: 6rem;
+            animation: fadeInUp 1s ease;
         }
 
-        .footer-content {
-            max-width: var(--container-width);
+        .testimonial-content {
+            max-width: 800px;
             margin: 0 auto;
-            text-align: center;
-            padding: 0 2rem;
+            font-size: 1.25rem;
+            color: var(--dark-gray);
+            line-height: 1.8;
+        }
+
+        .testimonial-content p::before {
+            content: '"';
+            font-size: 2.5rem;
+            color: var(--brand-green);
+            margin-right: 0.5rem;
+        }
+
+        .testimonial-content p::after {
+            content: '"';
+            font-size: 2.5rem;
+            color: var(--brand-green);
+            margin-left: 0.5rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--black);
+            margin-top: 2rem;
+        }
+
+        .blog-section {
+            max-width: var(--container-width);
+            margin: 6rem auto;
+            padding: 2rem;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .blog-card {
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            animation: fadeInUp 1s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(46, 160, 67, 0.15);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+
+        .blog-content p {
             font-size: 1.1rem;
-            opacity: 0.9;
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        .blog-status.expanded {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .blog-status-details {
+            display: none;
+        }
+
+        .blog-status.expanded .blog-status-details {
+            display: block;
         }
 
         @media (max-width: 768px) {
@@ -301,6 +436,23 @@
                 font-size: 2rem;
             }
         }
+        footer {
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .footer-content {
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -333,22 +485,167 @@
     </section>
 
     <section class="features">
-        <h2 class="section-title">Our AI-Driven Features 🌟</h2>
+        <h2 class="section-title" data-aos="fade-up">Our AI-Driven Features 🌟</h2>
         <div class="features-grid">
-            <div class="feature-card" onclick="window.location.href='/disease-detection';">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100" onclick="window.location.href='/disease-detection';">
                 <img src="/static/coronavirus.png" alt="Disease Detection">
                 <h3>Disease Detection</h3>
                 <p>Detect plant diseases early for healthier crops and higher yields.</p>
             </div>
-            <div class="feature-card" onclick="window.location.href='/farm-management';">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200" onclick="window.location.href='/farm-management';">
                 <img src="static/farm.png" alt="Farm Management">
                 <h3>Farm Management</h3>
                 <p>Monitor soil health, water levels, and manage resources efficiently.</p>
             </div>
-            <div class="feature-card" onclick="window.location.href='/chatbot';">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300" onclick="window.location.href='/chatbot';">
                 <img src="/static/two-rounded-rectangle-chatbox.png" alt="AI Assistant">
                 <h3>AI Assistant</h3>
                 <p>Get expert farming advice anytime from your virtual assistant.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <h2 data-aos="fade-down" class="section-title">What Our Farmers Say</h2>
+        <div class="testimonials-container">
+            <div class="testimonial" data-aos="fade-up">
+                <p class="testimonial-content">"Growmate has transformed my farm! With the disease detection and crop management features, I’m managing my resources better than ever."</p>
+                <div class="testimonial-author">— John Doe, Farmer</div>
+            </div>
+            <div class="testimonial" data-aos="fade-up" data-aos-delay="100">
+                <p class="testimonial-content">"I love the planting calendar feature. It keeps me on track throughout the season. Highly recommended for any farmer."</p>
+                <div class="testimonial-author">— Jane Smith, Farmer</div>
+            </div>
+            <div class="testimonial" data-aos="fade-up" data-aos-delay="200">
+                <p class="testimonial-content">"Thanks to Growmate, I learned how to better manage my crops. The chatbot and Verbial Gallery are game-changers for quick advice."</p>
+                <div class="testimonial-author">— Arjun Patel, Farm Manager</div>
+            </div>
+        </div>
+    </section>
+    <section class="blog-section">
+        <h2 class="section-title" data-aos="fade-up">Latest from the Growmate Blog 📰</h2>
+        <div class="blog-grid">
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="100" onclick="toggleBlogStatus(this)">
+                <img src="/static/Blog_asset/blog_1.jpg" alt="Blog Image 1">
+                <div class="blog-content">
+                    <h3>Unlocking the Power of AI in Sustainable Agriculture</h3>
+                    <p>Discover how Growmate's AI-driven solutions are revolutionizing the way farmers approach their operations, from disease detection to resource optimization.</p>
+                    <div class="blog-status">
+                        <span>Nov 10, 2024</span>
+                        <span>5 min read</span>
+                        <div class="blog-status-details">
+                            <p>Author: Nambu HariSaran.N </p>
+                            <p>Founder</p>>
+                            <p>Category: Technology</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="200" onclick="toggleBlogStatus(this)">
+                <img src="/static/Blog_asset/blog-2.png" alt="Blog Image 2">
+                <div class="blog-content">
+                    <h3>Precision Farming: Maximizing Yields with Data-Driven Insights</h3>
+                    <p>Learn how Growmate's advanced analytics and IoT integration can help you optimize your farming operations for increased productivity and sustainability.</p>
+                    <div class="blog-status">
+                        <span>June 1, 2024</span>
+                        <span>7 min read</span>
+                        <div class="blog-status-details">
+                            <p>Author: Sujith.R</p>
+                            <p>Category: Agronomy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="300" onclick="toggleBlogStatus(this)">
+                <img src="/static/Blog_asset/blog-3.jpg" alt="Blog Image 3">
+                <div class="blog-content">
+                    <h3>Revolutionizing Crop Monitoring with Computer Vision</h3>
+                    <p>Discover how Growmate's advanced computer vision algorithms can help you identify issues in your crops early, leading to improved yields and reduced waste.</p>
+                    <div class="blog-status">
+                        <span>July 1, 2024</span>
+                        <span>6 min read</span>
+                        <div class="blog-status-details">
+                            <p>Author: Sujith.R</p>
+                            <p>Co-Founder</p>
+                            <p>Category: Technology</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="400" onclick="toggleBlogStatus(this)">
+                <img src="/static/Blog_asset/blog_4.jpg" alt="Blog Image 4">
+                <div class="blog-content">
+                    <h3>Sustainable Irrigation: Optimizing Water Usage with AI</h3>
+                    <p>Learn how Growmate's AI-powered irrigation system can help you conserve water, reduce waste, and ensure your crops get the right amount of hydration.</p>
+                    <div class="blog-status">
+                        <span>November 1, 2024</span>
+                        <span>8 min read</span>
+                        <div class="blog-status-details">
+                            <p>Author: Rakshan</p>
+                            <p>Category: Sustainability</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="500" onclick="toggleBlogStatus(this)">
+                <img src="/static/Blog_asset/blog-5" alt="Blog Image 5">
+                <div class="blog-content">
+                    <h3>Combating Plant Diseases with Computer Vision</h3>
+                    <p>Discover how Growmate's advanced disease detection algorithms can help you identify and treat plant diseases before they spread, leading to healthier crops and higher yields.</p>
+                    <div class="blog-status">
+                        <span>November 1, 2024</span>
+                        <span>7 min read</span>
+                        <div class="blog-status-details">
+                            <p>Author: Varshini</p>
+                            <p>Category: Agronomy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="600" onclick="toggleBlogStatus(this)">
+                <img src="/static/Blog_asset/blog6.jpg" alt="Blog Image 6">
+                <div class="blog-content">
+                    <h3>Precision Nutrient Management: Optimizing Crop Yields</h3>
+                    <p>Learn how Growmate's soil analysis and nutrient recommendation tools can help you fine-tune your fertilizer application, leading to healthier plants and higher quality produce.</p>
+                    <div class="blog-status">
+                        <span>November 1, 2024</span>
+                        <span>9 min read</span>
+                        <div class="blog-status-details">
+                            <p>Author: Karshini</p>
+                            <p>Category: Agronomy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="700" onclick="toggleBlogStatus(this)">
+                <img src="/static/Blog_asset/2148746488.jpg" alt="Blog Image 7">
+                <div class="blog-content">
+                    <h3>Predictive Analytics in Farming: Improving Decision-Making</h3>
+                    <p>Discover how Growmate's advanced predictive analytics can help you make more informed decisions about planting, harvesting, and resource allocation, leading to improved profitability and sustainability.</p>
+                    <div class="blog-status">
+                        <span>November 1, 2024</span>
+                        <span>10 min read</span>
+                        <div class="blog-status-details">
+                            <p>Author: Sri Kumaran</p>
+                            <p>Category: Data Science</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="800" onclick="toggleBlogStatus(this)">
+                <img src="static/Blog_asset/7607460_3685320.jpg" alt="Blog Image 8">
+                <div class="blog-content">
+                    <h3>The Future of Autonomous Farming: Growmate's AI-Powered Tractors</h3>
+                    <p>Learn about Growmate's cutting-edge autonomous farming technology, which combines computer vision, machine learning, and robotics to revolutionize the way you manage your fields.</p>
+                    <div class="blog-status">
+                        <span>December 1, 2024</span>
+                        <span>12 min read</span>
+                        <div class="blog-status-details">
+                            <p>Author: Mokshitha</p>
+                            <p>Category: Technology</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -359,11 +656,21 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
         function toggleNav(element) {
             const navLinks = document.querySelector('.nav-links');
             navLinks.classList.toggle('show');
             element.classList.toggle('active');
+        }
+
+        function toggleBlogStatus(element) {
+            element.querySelector('.blog-status').classList.toggle('expanded');
         }
     </script>
 </body>
