@@ -145,5 +145,13 @@ def analyze():
 @app.route('/about_us')
 def about_us():
     return render_template('about_us.html')
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory('static', 'sitemap.xml')
+
+# Serve robots.txt
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory('static', 'robots.txt')
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5000)), debug=False)
