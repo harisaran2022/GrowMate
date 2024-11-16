@@ -58,7 +58,6 @@ def disease_detection():
         image_url = url_for('static', filename=f'uploads/{filename}')
         logger.info(f"Result: {result}")
         logger.info(f"Gemini Analysis: {gemini_analysis}")
-        # Convert Gemini analysis to HTML using markdown
         gemini_analysis_html = markdown.markdown(gemini_analysis)
         return render_template('result.html', result=result, gemini_analysis=gemini_analysis_html, image_url=image_url)
     return render_template('disease_detection.html')

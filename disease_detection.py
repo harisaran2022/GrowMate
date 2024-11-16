@@ -23,6 +23,7 @@ def load_class_indices(json_file):
 class_indices = load_class_indices('class_indices.json')
 
 def analyze_plant_disease(image_path):
+    
     """Analyze the plant disease based on the uploaded image."""
     try:
         # Preprocess the image
