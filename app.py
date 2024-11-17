@@ -66,26 +66,26 @@ def farm_management():
     """Handle farm management recommendations."""
     if request.method == 'POST':
         area = request.form.get('area')
-        soil_fertility = request.form.get('soil_fertility')
+        water_content = request.form.get('water_content')
         location = request.form.get('location')
-        recommendation = get_farm_recommendations(area, soil_fertility, location)
+        recommendation = get_farm_recommendations(area, water_content, location)
         
         # Convert recommendation to HTML using markdown
         recommendation_html = markdown.markdown(recommendation)
         
         return render_template('farm_management.html', recommendation=recommendation_html)
     return render_template('farm_management.html')
-def get_farm_recommendations(area, soil_fertility, location):
+def get_farm_recommendations(area, water_content, location):
     """Get farm recommendations using the Gemini API."""
     prompt = (f"Provide farm management recommendations for an area of {area}, "
-            f"with {soil_fertility} soil fertility, located in {location}. "
+            f"with {water_content} water moisture level , located in {location}. "
             "Include crop suggestions and basic care instructions.")
     
     return fetch_gemini_response(prompt)
-def get_farm_recommendations(area, soil_fertility, location):
+def get_farm_recommendations(area, water_content, location):
     """Get farm recommendations using the Gemini API."""
     prompt = (f"Provide farm management recommendations for an area of {area}, "
-            f"with {soil_fertility} soil fertility, located in {location}. "
+            f"with {water_content} water moisture level , located in {location}. "
             "Include crop suggestions and basic care instructions.")
     
     return fetch_gemini_response(prompt)
