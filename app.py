@@ -77,17 +77,14 @@ def farm_management():
     return render_template('farm_management.html')
 def get_farm_recommendations(area, water_content, location):
     """Get farm recommendations using the Gemini API."""
-    prompt = (f"Provide farm management recommendations for an area of {area}, "
-            f"with {water_content} water moisture level , located in {location}. "
-            "Include crop suggestions and basic care instructions.")
-    
-    return fetch_gemini_response(prompt)
-def get_farm_recommendations(area, water_content, location):
-    """Get farm recommendations using the Gemini API."""
-    prompt = (f"Provide farm management recommendations for an area of {area}, "
-            f"with {water_content} water moisture level , located in {location}. "
-            "Include crop suggestions and basic care instructions.")
-    
+    prompt = (
+        f"Provide farm management recommendations for an area of {area} in acre, "
+        f"with {water_content} water moisture level, located in {location}. "
+        "Include crop suggestions and basic care instructions."
+        "And Also provide important points and Method of division of crops"
+        "Always reply like your a Bot Called Growmate"
+       )
+     
     return fetch_gemini_response(prompt)
 @app.route('/chatbot', methods=['GET', 'POST'])
 def chatbot():
