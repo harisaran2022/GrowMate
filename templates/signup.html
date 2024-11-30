@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Growmate 🌱</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-green: #2EA043;
+            --dark-green: #216E2E;
+            --light-green: #3FB950;
+            --accent-green: #DAFBE1;
+            --black: #1B1F24;
+            --dark-gray: #2D333B;
+            --light-gray: #F6F8FA;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--black);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(rgba(27, 31, 36, 0.8), rgba(46, 160, 67, 0.8));
+            padding: 1rem;
+        }
+
+        .signup-container {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--brand-green);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-group {
+            flex: 1;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--dark-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--brand-green);
+            box-shadow: 0 0 0 3px rgba(46, 160, 67, 0.2);
+        }
+
+        .signup-button {
+            background: var(--brand-green);
+            color: var(--white);
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .signup-button:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(46, 160, 67, 0.2);
+        }
+
+        .login-link {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .login-link a {
+            color: var(--brand-green);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .login-link a:hover {
+            color: var(--dark-green);
+            text-decoration: underline;
+        }
+
+        .user-type {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .user-type-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .user-type-option input {
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .signup-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="logo">
+            Growmate.tech 🌱
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <form class="signup-form" action="/signup" method="post">
+            <div class="user-type">
+                <div class="user-type-option">
+                    <input type="radio" id="farmer" name="user_type" value="farmer" required>
+                    <label for="farmer">Farmer</label>
+                </div>
+                <div class="user-type-option">
+                    <input type="radio" id="farm_manager" name="user_type" value="farm_manager">
+                    <label for="farm_manager">Farm Manager</label>
+                </div>
+                <div class="user-type-option">
+                    <input type="radio" id="agricultural_expert" name="user_type" value="agricultural_expert">
+                    <label for="agricultural_expert">Agricultural Expert</label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" required placeholder="Enter your first name" />
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" required placeholder="Enter your last name" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email" />
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Create a strong password" />
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required placeholder="Repeat your password" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="farm_location">Farm Location (Optional)</label>
+                <input type="text" id="farm_location" name="farm_location" placeholder="City, State, Country" />
+            </div>
+
+            <button type="submit" class="signup-button">Create Account</button>
+
+            <div class="login-link">
+                Already have an account? <a href="/login">Log In</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.querySelector('.signup-form').addEventListener('submit', function(e) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            const email = document.getElementById('email').value;
+
+            // Basic validation
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                alert('Passwords do not match');
+                return;
+            }
+
+            // Optional: Password strength check
+            if (password.length < 8) {
+                e.preventDefault();
+                alert('Password must be at least 8 characters long');
+            }
+        });
+    </script>
+</body>
+</html>

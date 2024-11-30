@@ -69,8 +69,14 @@
 
         .nav-links {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             list-style: none;
+            align-items: center; /* Ensures vertical alignment */
+        }
+
+        .nav-links li {
+            display: flex;
+            align-items: center; /* Vertically center list items */
         }
 
         .nav-links a {
@@ -80,6 +86,7 @@
             padding: 0.5rem 1rem;
             border-radius: 6px;
             transition: var(--transition);
+            display: inline-block; /* Ensures padding works correctly */
         }
 
         .nav-links a:hover,
@@ -466,26 +473,31 @@
              <meta property="og:url" content="https://www.growmate.tech">
                <meta name="twitter:card" content="growmate(full).jpg">
              <link rel="canonical" href="https://www.growmate.tech">
-            <nav class="navbar">
-            <div class="nav-container">
-            <a href="/" class="logo">
-                Growmate.tech 🌱
-            </a>
-                <link rel="icon" href="/static/Growmatelogo_favicon.png">
-            <div class="nav-toggle" onclick="toggleNav(this)">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <ul class="nav-links">
-                <li><a href="/" class="active">Home</a></li>
-                <li><a href="/disease-detection">Disease Detection</a></li>
-                <li><a href="/farm-management">Farm Management</a></li>
-                <li><a href="/chatbot">AI Assistant</a></li>
-                <li><a href="/about_us">About Us</a></li>
-            </ul>
+              <nav class="navbar">
+    <div class="nav-container">
+        <a href="/" class="logo">
+            Growmate.tech 🌱
+        </a>
+        <div class="nav-toggle" onclick="toggleNav(this)">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-    </nav>
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/disease-detection">Disease Detection</a></li>
+            <li><a href="/farm-management">Farm Management</a></li>
+            <li><a href="/chatbot">AI Assistant</a></li>
+            <li><a href="/about_us">About Us</a></li>
+            {% if session.logged_in %}
+                <li><a href="/logout">Log Out</a></li>
+            {% else %}
+                <li><a href="/login">Log In</a></li>
+                <li><a href="/signup">Sign Up</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
 
     <header class="hero">
         <div class="hero-content">
@@ -660,8 +672,6 @@
         </div>
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({

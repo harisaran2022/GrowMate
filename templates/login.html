@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Growmate 🌱</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-green: #2EA043;
+            --dark-green: #216E2E;
+            --light-green: #3FB950;
+            --accent-green: #DAFBE1;
+            --black: #1B1F24;
+            --dark-gray: #2D333B;
+            --light-gray: #F6F8FA;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--black);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(rgba(27, 31, 36, 0.8), rgba(46, 160, 67, 0.8));
+        }
+
+        .login-container {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--brand-green);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--dark-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--brand-green);
+            box-shadow: 0 0 0 3px rgba(46, 160, 67, 0.2);
+        }
+
+        .login-button {
+            background: var(--brand-green);
+            color: var(--white);
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .login-button:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(46, 160, 67, 0.2);
+        }
+
+        .signup-link {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .signup-link a {
+            color: var(--brand-green);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .signup-link a:hover {
+            color: var(--dark-green);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                width: 95%;
+                padding: 2rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+
+               .flash-messages {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .flash-messages .success {
+            background-color: #dafbe1;
+            color: #2ea043;
+            padding: 0.75rem;
+            border-radius: 8px;
+        }
+        .flash-messages .error {
+            background-color: #ffebe9;
+            color: #cf222e;
+            padding: 0.75rem;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            Growmate.tech 🌱
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form class="login-form" action="/login" method="post">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password" />
+            </div>
+            <button type="submit" class="login-button">Log In</button>
+            <div class="signup-link">
+                Don't have an account? <a href="/signup">Sign Up</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
