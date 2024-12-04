@@ -348,7 +348,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="/" class="logo">
-                Growmate.tech 🌱
+                Growmate
             </a>
             <div class="nav-toggle" onclick="toggleNav(this)">
                 <div></div>
@@ -357,10 +357,16 @@
             </div>
             <ul class="nav-links">
                 <li><a href="/" >Home</a></li>
-                <li><a href="/disease-detection">Disease Detection</a></li>
-                <li><a href="/farm-management">Farm Management</a></li>
-                <li><a href="/chatbot">AI Assistant</a></li>
+                <li><a href="/disease-detection">GrowFix</a></li>
+                <li><a href="/farm-management">Growplan</a></li>
+                <li><a href="/chatbot">GrowBot</a></li>
                 <li><a href="/about_us"class="active">About Us</a></li>
+                {% if session.logged_in %}
+                <li><a href="/logout">Log Out</a></li>
+            {% else %}
+                <li><a href="/login">Log In</a></li>
+                <li><a href="/signup">Sign Up</a></li>
+            {% endif %}
             </ul>
         </div>
     </nav>
@@ -418,7 +424,7 @@
                     <h3>Sushmaa</h3>
                     <p>Content Writer</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/sushmaa_.pvt._/"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="team-member">
@@ -434,8 +440,7 @@
                     <h3>Sujith</h3>
                     <p>Founder/Marketing Manager</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/suzjith/"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="team-member">
@@ -443,7 +448,7 @@
                     <h3>Varshini</h3>
                     <p>Speaker</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/__.varshh__._/"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="team-member">
@@ -451,7 +456,7 @@
                     <h3>Karshini</h3>
                     <p>Speaker</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/karsinii_32/"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="team-member">
@@ -459,7 +464,7 @@
                     <h3>Kumaran</h3>
                     <p>Creative Director</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/kxmaran_10/"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="team-member">

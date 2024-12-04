@@ -230,7 +230,7 @@
             background: var(--black);
             color: var(--white);
             padding: 2rem 0;
-            margin-top: 4rem;
+            margin-top: auto;
         }
 
         .footer-content {
@@ -305,7 +305,7 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="logo">Growmate.tech 🌱</a>
+            <a href="/" class="logo">Growmate</a>
             <div class="nav-toggle" onclick="toggleNav(this)">
                 <div></div>
                 <div></div>
@@ -313,10 +313,16 @@
             </div>
             <ul class="nav-links">
                 <li><a href="/" >Home</a></li>
-                <li><a href="/disease-detection"class="active">Disease Detection</a></li>
-                <li><a href="/farm-management">Farm Management</a></li>
-                <li><a href="/chatbot">AI Assistant</a></li>
-                <li><a href="/about_us">About Us</a></li>
+                <li><a href="/disease-detection"class="active">Growfix</a></li>
+                <li><a href="/farm-management">GrowPlan</a></li>
+                <li><a href="/chatbot">GrowBot</a></li>
+                <li><a href="/about_us">About US</a></li>
+                {% if session.logged_in %}
+                <li><a href="/logout">Log Out</a></li>
+            {% else %}
+                <li><a href="/login">Log In</a></li>
+                <li><a href="/signup">Sign Up</a></li>
+            {% endif %}
             </ul>
         </div>
     </nav>
