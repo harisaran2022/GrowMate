@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant Disease Detection - Growmate</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='Growmatelogo_favicon.png') }}">
 
     <style>
         :root {
@@ -30,11 +28,24 @@
             scroll-behavior: smooth;
         }
 
+        html, body {
+            height: 100%;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--light-gray);
             color: var(--black);
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .navbar {
@@ -145,6 +156,11 @@
             border-color: var(--brand-green);
             background-color: var(--accent-green);
             transform: translateY(-2px);
+        }
+
+        .upload-area.drag-over {
+            border-color: var(--brand-green);
+            background-color: rgba(46, 160, 67, 0.1);
         }
 
         .upload-icon {
@@ -319,10 +335,10 @@
                 <li><a href="/about_us">About US</a></li>
                 {% if session.logged_in %}
                 <li><a href="/logout">Log Out</a></li>
-            {% else %}
+                {% else %}
                 <li><a href="/login">Log In</a></li>
                 <li><a href="/signup">Sign Up</a></li>
-            {% endif %}
+                {% endif %}
             </ul>
         </div>
     </nav>
@@ -332,12 +348,12 @@
             <h2 class="upload-title">Upload Plant Image for Disease Detection</h2>
             <p class="upload-description">Select an image of the plant to diagnose its disease.</p>
             <form action="{{ url_for('disease_detection') }}" method="POST" enctype="multipart/form-data">
-                <div class="upload-area" onclick="document.getElementById('file-input').click();">
-                    <input type="file" id="file-input" name="image" accept="image/*" style="display:none;" onchange="this.form.submit()">
+                <div id="drop-area" class="upload-area">
+                    <input type="file" id="file-input" name="image" accept="image/*" style="display:none;">
                     <div class="upload-icon">📷</div>
                     <span>Drag & drop or click to select an image</span>
                 </div>
-                <button type="submit" class="upload-button">Upload</button>
+                <button type="submit" id="upload-button" class="upload-button" disabled>Upload</button>
             </form>
         </div>
 
@@ -361,6 +377,71 @@
     </footer>
 
     <script>
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('file-input');
+        const uploadButton = document.getElementById('upload-button');
+        const uploadForm = document.getElementById('upload-form');
+
+        // Prevent default drag behaviors
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        // Highlight drop area when item is dragged over
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        // Handle dropped files
+        dropArea.addEventListener('drop', handleDrop, false);
+
+        // Handle file input change
+        fileInput.addEventListener('change', handleFiles, false);
+
+        // Click to open file selector
+        dropArea.addEventListener('click', () => fileInput.click(), false);
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function highlight() {
+            dropArea.classList.add('drag-over');
+        }
+
+        function unhighlight() {
+            dropArea.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+
+        function handleFiles(event) {
+            const files = event.target ? event.target.files : event;
+
+            if (files.length > 0) {
+                const file = files[0];
+                if (file.type.startsWith('image/')) {
+                    uploadButton.disabled = false;
+                    uploadButton.textContent = 'Upload ' + file.name;
+                } else {
+                    alert('Please upload a valid image file.');
+                    fileInput.value = '';
+                    uploadButton.disabled = true;
+                    uploadButton.textContent = 'Upload';
+                }
+            }
+        }
+
         function toggleNav(element) {
             const navLinks = document.querySelector('.nav-links');
             navLinks.classList.toggle('show');

@@ -150,8 +150,8 @@ def farm_management():
         area = request.form.get('area')
         water_content = request.form.get('water_content')
         location = request.form.get('location')
-        recommendation = get_farm_recommendations(area, water_content, location)
-
+        language = request.form.get('language')
+        recommendation = get_farm_recommendations(area, water_content, language, location)
         # Convert recommendation to HTML using markdown
         recommendation_html = markdown.markdown(recommendation)
 
@@ -159,17 +159,18 @@ def farm_management():
     return render_template('farm_management.html')
 
 
-def get_farm_recommendations(area, water_content, location):
+def get_farm_recommendations(area, water_content, language, location):
     """Get farm recommendations using the Gemini API."""
     prompt = (
         f"Provide farm management recommendations for an area of {area} in acre, "
         f"with {water_content} water moisture level, located in {location}. "
-        "Include crop suggestions and basic care instructions."
-        "And Also provide important points and Method of division of crops"
-        "Always reply like your a Bot Called Growmate"
+        f"Include crop suggestions and basic care instructions. Reply in {language} "
+        f"with all new features. Also, provide important points and methods of "
+        f"division of crops. Always reply like you're a bot called Growmate."
     )
 
     return fetch_gemini_response(prompt)
+
 
 
 @app.route('/chatbot', methods=['GET', 'POST'])

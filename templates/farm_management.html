@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='Growmatelogo_favicon.png') }}">
 
-    
+
     <style>
         :root {
             --brand-green: #2EA043;
@@ -317,77 +317,135 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="logo">
-                Growmate
-            </a>
-            <div class="nav-toggle" onclick="toggleNav(this)">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <ul class="nav-links">
-                <li><a href="/" >Home</a></li>
-                <li><a href="/disease-detection">GrowFix</a></li>
-                <li><a href="/farm-management" class="active">GrowPlan</a></li>
-                <li><a href="/chatbot">GrowBot</a></li>
-                <li><a href="/about_us">About Us</a></li>
-                {% if session.logged_in %}
-                <li><a href="/logout">Log Out</a></li>
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="/" class="logo">
+            Growmate
+        </a>
+        <div class="nav-toggle" onclick="toggleNav(this)">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/disease-detection">GrowFix</a></li>
+            <li><a href="/farm-management" class="active">GrowPlan</a></li>
+            <li><a href="/chatbot">GrowBot</a></li>
+            <li><a href="/about_us">About Us</a></li>
+            {% if session.logged_in %}
+            <li><a href="/logout">Log Out</a></li>
             {% else %}
-                <li><a href="/login">Log In</a></li>
-                <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/login">Log In</a></li>
+            <li><a href="/signup">Sign Up</a></li>
             {% endif %}
-            </ul>
+        </ul>
+    </div>
+</nav>
+
+<main class="content">
+    <h1>Farm Management</h1>
+    <p class="intro">Get personalized recommendations for your farm based on its characteristics.</p>
+
+    <form id="farmManagementForm" method="POST">
+        <div class="form-group">
+            <label for="area">Farm Area (in acres):</label>
+            <input type="number" id="area" name="area" required min="0" step="0.1" placeholder="Enter farm area">
         </div>
-    </nav>
-
-    <main class="content">
-        <h1>Farm Management</h1>
-        <p class="intro">Get personalized recommendations for your farm based on its characteristics.</p>
-
-        <form id="farmManagementForm" method="POST">
-            <div class="form-group">
-                <label for="area">Farm Area (in acres):</label>
-                <input type="number" id="area" name="area" required min="0" step="0.1" placeholder="Enter farm area">
-            </div>
-            <div class="form-group">
-                <label for="water_content">Water Moisture level:</label>
-                <select id="water_content" name="water_content" required>
-                    <option value="">Select Water Moisture level</option>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="location">Location:</label>
-                <input type="text" id="location" name="location" required placeholder="Enter farm location">
-            </div>
-            <button type="submit" class="btn">Get Recommendations</button>
-        </form>
-
-        {% if recommendation %}
-        <div class="result">
-            <h2>Farm Management Recommendations</h2>
-            <p>{{ recommendation | safe }}</p>
+        <div class="form-group">
+            <label for="water_content">Water Moisture level:</label>
+            <select id="water_content" name="water_content" required>
+                <option value="">Select Water Moisture level</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
         </div>
-        {% endif %}
-    </main>
+        <div class="form-group">
+            <label for="language">Select Language:</label>
+            <select id="language" name="language" required>
+                <option value="">Select Language</option>
+                <option value="tamil">Tamil</option>
+                <option value="english">English</option>
+                <option value="telugu">Telugu</option>
+                <option value="bengali">Bengali</option>
+                <option value="marathi">Marathi</option>
+                <option value="gujarati">Gujarati</option>
+                <option value="kannada">Kannada</option>
+                <option value="malayalam">Malayalam</option>
+                <option value="odia">Odia</option>
+                <option value="punjabi">Punjabi</option>
+                <option value="assamese">Assamese</option>
+                <option value="urdu">Urdu</option>
+                <option value="hindi">Hindi</option>
+                <option value="sanskrit">Sanskrit</option>
+                <option value="maithili">Maithili</option>
+                <option value="santali">Santali</option>
+                <option value="konkani">Konkani</option>
+                <option value="dogri">Dogri</option>
+                <option value="manipuri">Manipuri</option>
+                <option value="bodo">Bodo</option>
+                <option value="kashmiri">Kashmiri</option>
+                <option value="sindhi">Sindhi</option>
+                <option value="nepali">Nepali</option>
+                <option value="tulu">Tulu</option>
+                <option value="bhojpuri">Bhojpuri</option>
+                <option value="rajasthani">Rajasthani</option>
+                <option value="magahi">Magahi</option>
+                <option value="haryanvi">Haryanvi</option>
+                <option value="garhwali">Garhwali</option>
+                <option value="awadhi">Awadhi</option>
+                <option value="marwari">Marwari</option>
+                <option value="chhattisgarhi">Chhattisgarhi</option>
+                <option value="bundeli">Bundeli</option>
+                <option value="mandarin">Chinese (Mandarin)</option>
+                <option value="spanish">Spanish</option>
+                <option value="french">French</option>
+                <option value="arabic">Arabic</option>
+                <option value="german">German</option>
+                <option value="russian">Russian</option>
+                <option value="portuguese">Portuguese</option>
+                <option value="japanese">Japanese</option>
+                <option value="korean">Korean</option>
+                <option value="turkish">Turkish</option>
+                <option value="italian">Italian</option>
+                <option value="persian">Persian (Farsi)</option>
+                <option value="malay">Malay</option>
+                <option value="thai">Thai</option>
+                <option value="swahili">Swahili</option>
+                <option value="filipino">Filipino (Tagalog)</option>
+                <option value="dutch">Dutch</option>
+            </select>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Growmate - Your AI Partner for Sustainable Agriculture 🌱</p>
         </div>
-    </footer>
 
-    <script>
-        function toggleNav(element) {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('show');
-            element.classList.toggle('active');
-        }
-    </script>
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required placeholder="Enter farm location">
+        </div>
+        <button type="submit" class="btn">Get Recommendations</button>
+    </form>
+
+    {% if recommendation %}
+    <div class="result">
+        <h2>Farm Management Recommendations</h2>
+        <p>{{ recommendation | safe }}</p>
+    </div>
+    {% endif %}
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2024 Growmate - Your AI Partner for Sustainable Agriculture 🌱</p>
+    </div>
+</footer>
+
+<script>
+    function toggleNav(element) {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('show');
+        element.classList.toggle('active');
+    }
+</script>
 </body>
 </html>
