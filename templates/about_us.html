@@ -292,6 +292,20 @@
                 display: flex;
             }
 
+           .nav-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.logo {
+    height: 50px;  /* Fixed height */
+    width: auto;   /* Maintain aspect ratio */
+    object-fit: contain;
+    max-width: 200px;
+}
+
             .nav-toggle.active div:nth-child(1) {
                 transform: rotate(45deg) translate(8px, 8px);
             }
@@ -345,151 +359,167 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="logo">
-                Growmate
-            </a>
+<nav class="navbar">
+    <div class="nav-container">
+        <header class="nav-logo">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Growmate Logo" class="logo">
+</header>
             <div class="nav-toggle" onclick="toggleNav(this)">
                 <div></div>
                 <div></div>
                 <div></div>
             </div>
             <ul class="nav-links">
-                <li><a href="/" >Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="/disease-detection">GrowFix</a></li>
                 <li><a href="/farm-management">Growplan</a></li>
                 <li><a href="/chatbot">GrowBot</a></li>
-                <li><a href="/about_us"class="active">About Us</a></li>
+                <li><a href="/about_us" class="active">About Us</a></li>
                 {% if session.logged_in %}
-                <li><a href="/logout">Log Out</a></li>
-            {% else %}
-                <li><a href="/login">Log In</a></li>
-                <li><a href="/signup">Sign Up</a></li>
-            {% endif %}
+                    <li><a href="/logout">Log Out</a></li>
+                {% else %}
+                    <li><a href="/login">Log In</a></li>
+                    <li><a href="/signup">Sign Up</a></li>
+                {% endif %}
             </ul>
-        </div>
-    </nav>
+    </div>
+</nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>About Growmate Solutions</h1>
-            <p>Revolutionizing Agriculture through AI Innovation</p>
+<section class="hero">
+    <div class="hero-content">
+        <h1>About Growmate Solutions</h1>
+        <p>Revolutionizing Agriculture through AI Innovation</p>
+    </div>
+</section>
+
+<main class="main-container">
+    <section class="section">
+        <div class="section-header">
+            <i class="fas fa-seedling"></i>
+            <h2>Our Story</h2>
         </div>
+        <p>Growmate was created by a group of students passionate about solving the challenges farmers face with soil
+            and plant health. We developed tools that provide instant support and promote learning in agriculture. By
+            sharing knowledge and earning rewards, farmers can enhance their skills and make informed decisions.
+            Together, we envision a thriving agricultural community dedicated to sustainability.</p>
     </section>
 
-    <main class="main-container">
-        <section class="section">
-            <div class="section-header">
-                <i class="fas fa-seedling"></i>
-                <h2>Our Story</h2>
-            </div>
-            <p>Growmate was created by a group of students passionate about solving the challenges farmers face with soil and plant health. We developed tools that provide instant support and promote learning in agriculture. By sharing knowledge and earning rewards, farmers can enhance their skills and make informed decisions. Together, we envision a thriving agricultural community dedicated to sustainability.</p>
-        </section>
-
-        <section class="section">
-            <div class="section-header">
-                <i class="fas fa-bullseye"></i>
-                <h2>Mission</h2>
-            </div>
-            <p>To equip farmers with simple, effective tools for assessing soil fertility and identifying plant diseases, while promoting a community focused on sustainable farming and environmental care.</p>
-        </section>
-
-        <section class="section">
-            <div class="section-header">
-                <i class="fas fa-eye"></i>
-                <h2>Vision</h2>
-            </div>
-            <p>To transform farming through technology, creating a future where every farmer has the knowledge and resources to cultivate healthy crops sustainably and protect the environment.</p>
-        </section>
-
-        <section class="section">
-            <div class="section-header">
-                <i class="fas fa-users"></i>
-                <h2>Our Team</h2>
-            </div>
-            <div class="team-grid">
-                <div class="team-member">
-                    <img src="static/TeamImages/1.jpg" alt="NambuHarisaran">
-                    <h3>NambuHarisaran</h3>
-                    <p>Lead Developer and Founder</p>
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/nambuharisaran/"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/HARISARAN123"><i class="fab fa-github"></i></a>
-                        <a href="https://www.instagram.com/harisaran.xx__/"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <img src="static/TeamImages/4.png" alt="Sushmaa">
-                    <h3>Sushmaa</h3>
-                    <p>Content Writer</p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/sushmaa_.pvt._/"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <img src="static/TeamImages/5.jpg" alt="Rakshan">
-                    <h3>Rakshan</h3>
-                    <p>Hardware Department</p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/yuta_okkatsu.r5/"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <img src="static/TeamImages/2.jpg" alt="Sujith">
-                    <h3>Sujith</h3>
-                    <p>Founder/Marketing Manager</p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/suzjith/"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <img src="static/TeamImages/7.jpg" alt="Varshini">
-                    <h3>Varshini</h3>
-                    <p>Speaker</p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/__.varshh__._/"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <img src="static/TeamImages/8.jpg" alt="Karshini">
-                    <h3>Karshini</h3>
-                    <p>Speaker</p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/karsinii_32/"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <img src="static/TeamImages/3.jpg" alt="Kumaran">
-                    <h3>Kumaran</h3>
-                    <p>Creative Director</p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/kxmaran_10/"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <img src="static/TeamImages/6.jpg" alt="Mokshitha">
-                    <h3>Mokshitha</h3>
-                    <p>Research and Development</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 Growmate - Your AI Partner for Sustainable Agriculture 🌱</p>
+    <section class="section">
+        <div class="section-header">
+            <i class="fas fa-bullseye"></i>
+            <h2>Mission</h2>
         </div>
-    </footer>
+        <p>To equip farmers with simple, effective tools for assessing soil fertility and identifying plant diseases,
+            while promoting a community focused on sustainable farming and environmental care.</p>
+    </section>
 
-    <script>
-        function toggleNav(element) {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('show');
-            element.classList.toggle('active');
-        }
-    </script>
+    <section class="section">
+        <div class="section-header">
+            <i class="fas fa-eye"></i>
+            <h2>Vision</h2>
+        </div>
+        <p>To transform farming through technology, creating a future where every farmer has the knowledge and resources
+            to cultivate healthy crops sustainably and protect the environment.</p>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <i class="fas fa-users"></i>
+            <h2>Our Team</h2>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="static/TeamImages/1.jpg" alt="NambuHarisaran">
+                <h3>NambuHarisaran</h3>
+                <p>Lead Developer and Founder</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/nambuharisaran/"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/HARISARAN123"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/harisaran.xx__/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="static/TeamImages/4.png" alt="Sushmaa">
+                <h3>Sushmaa</h3>
+                <p>Content Writer</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/sushmaa_.pvt._/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="static/TeamImages/5.jpg" alt="Rakshan">
+                <h3>Rakshan</h3>
+                <p>Hardware Department</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/yuta_okkatsu.r5/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="static/TeamImages/2.jpg" alt="Sujith">
+                <h3>Sujith</h3>
+                <p>Founder/Marketing Manager</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/suzjith/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="static/TeamImages/7.jpg" alt="Varshini">
+                <h3>Varshini</h3>
+                <p>Speaker</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/__.varshh__._/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="static/TeamImages/8.jpg" alt="Karshini">
+                <h3>Karshini</h3>
+                <p>Speaker</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/karsinii_32/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="static/TeamImages/3.jpg" alt="Kumaran">
+                <h3>Kumaran</h3>
+                <p>Creative Director</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/kxmaran_10/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="static/TeamImages/6.jpg" alt="Mokshitha">
+                <h3>Mokshitha</h3>
+                <p>Research and Development</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <p>&copy; 2024 Growmate - Your AI Partner for Sustainable Agriculture 🌱</p>
+    </div>
+</footer>
+
+<script>
+    function toggleNav(element) {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('show');
+        element.classList.toggle('active');
+    }
+</script>
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/67542cb52480f5b4f5a98535/1iegct9hp';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
 </body>
 </html>

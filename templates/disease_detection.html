@@ -203,8 +203,14 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .results h3 {
@@ -262,6 +268,20 @@
             .nav-toggle {
                 display: flex;
             }
+            .nav-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.logo {
+    height: 50px;  /* Fixed height */
+    width: auto;   /* Maintain aspect ratio */
+    object-fit: contain;
+    max-width: 200px;
+}
+
 
             .nav-links {
                 display: none;
@@ -276,6 +296,7 @@
                 border-radius: 0 0 8px 8px;
                 box-shadow: var(--shadow);
             }
+
 
             .nav-links.show {
                 display: flex;
@@ -292,6 +313,7 @@
             .nav-toggle.active div:nth-child(3) {
                 transform: rotate(-45deg) translate(8px, -8px);
             }
+
 
             .upload-container {
                 margin: 100px 1rem 2rem;
@@ -319,134 +341,148 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="logo">Growmate</a>
-            <div class="nav-toggle" onclick="toggleNav(this)">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <ul class="nav-links">
-                <li><a href="/" >Home</a></li>
-                <li><a href="/disease-detection"class="active">Growfix</a></li>
-                <li><a href="/farm-management">GrowPlan</a></li>
-                <li><a href="/chatbot">GrowBot</a></li>
-                <li><a href="/about_us">About US</a></li>
-                {% if session.logged_in %}
+<
+<nav class="navbar">
+    <div class="nav-container">
+        <header class="nav-logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Growmate Logo" class="logo">
+        </header>
+        <div class="nav-toggle" onclick="toggleNav(this)">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/disease-detection" class="active">Growfix</a></li>
+            <li><a href="/farm-management">GrowPlan</a></li>
+            <li><a href="/chatbot">GrowBot</a></li>
+            <li><a href="/about_us">About US</a></li>
+            {% if session.logged_in %}
                 <li><a href="/logout">Log Out</a></li>
-                {% else %}
+            {% else %}
                 <li><a href="/login">Log In</a></li>
                 <li><a href="/signup">Sign Up</a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
 
-    <main>
-        <div class="upload-container">
-            <h2 class="upload-title">Upload Plant Image for Disease Detection</h2>
-            <p class="upload-description">Select an image of the plant to diagnose its disease.</p>
-            <form action="{{ url_for('disease_detection') }}" method="POST" enctype="multipart/form-data">
-                <div id="drop-area" class="upload-area">
-                    <input type="file" id="file-input" name="image" accept="image/*" style="display:none;">
-                    <div class="upload-icon">📷</div>
-                    <span>Drag & drop or click to select an image</span>
-                </div>
-                <button type="submit" id="upload-button" class="upload-button" disabled>Upload</button>
-            </form>
-        </div>
+<main>
+    <div class="upload-container">
+        <h2 class="upload-title">Upload Plant Image for Disease Detection</h2>
+        <p class="upload-description">Select an image of the plant to diagnose its disease.</p>
+        <form action="{{ url_for('disease_detection') }}" method="POST" enctype="multipart/form-data">
+            <div id="drop-area" class="upload-area">
+                <input type="file" id="file-input" name="image" accept="image/*" style="display:none;">
+                <div class="upload-icon">📷</div>
+                <span>Drag & drop or click to select an image</span>
+            </div>
+            <button type="submit" id="upload-button" class="upload-button" disabled>Upload</button>
+        </form>
+    </div>
 
-        {% if result %}
+    {% if result %}
         <div class="results" style="display:block;">
             <h3>Diagnosis Result</h3>
             {% for item in result %}
-            <div class="result-item">
-                <span class="result-name">{{ item['name'] }}</span>
-                <span class="result-confidence">{{ item['confidence'] | round(2) * 100 }}%</span>
-            </div>
+                <div class="result-item">
+                    <span class="result-name">{{ item['name'] }}</span>
+                    <span class="result-confidence">{{ item['confidence'] | round(2) * 100 }}%</span>
+                </div>
             {% endfor %}
         </div>
-        {% endif %}
-    </main>
+    {% endif %}
+</main>
 
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 Growmate - Your AI Partner for Sustainable Agriculture 🌱</p>
-        </div>
-    </footer>
+<footer>
+    <div class="footer-content">
+        <p>&copy; 2024 Growmate - Your AI Partner for Sustainable Agriculture 🌱</p>
+    </div>
+</footer>
 
-    <script>
-        const dropArea = document.getElementById('drop-area');
-        const fileInput = document.getElementById('file-input');
-        const uploadButton = document.getElementById('upload-button');
-        const uploadForm = document.getElementById('upload-form');
+<script>
+    const dropArea = document.getElementById('drop-area');
+    const fileInput = document.getElementById('file-input');
+    const uploadButton = document.getElementById('upload-button');
+    const uploadForm = document.getElementById('upload-form');
 
-        // Prevent default drag behaviors
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropArea.addEventListener(eventName, preventDefaults, false);
-            document.body.addEventListener(eventName, preventDefaults, false);
-        });
+    // Prevent default drag behaviors
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+    });
 
-        // Highlight drop area when item is dragged over
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropArea.addEventListener(eventName, highlight, false);
-        });
+    // Highlight drop area when item is dragged over
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+    });
 
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropArea.addEventListener(eventName, unhighlight, false);
-        });
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+    });
 
-        // Handle dropped files
-        dropArea.addEventListener('drop', handleDrop, false);
+    // Handle dropped files
+    dropArea.addEventListener('drop', handleDrop, false);
 
-        // Handle file input change
-        fileInput.addEventListener('change', handleFiles, false);
+    // Handle file input change
+    fileInput.addEventListener('change', handleFiles, false);
 
-        // Click to open file selector
-        dropArea.addEventListener('click', () => fileInput.click(), false);
+    // Click to open file selector
+    dropArea.addEventListener('click', () => fileInput.click(), false);
 
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
 
-        function highlight() {
-            dropArea.classList.add('drag-over');
-        }
+    function highlight() {
+        dropArea.classList.add('drag-over');
+    }
 
-        function unhighlight() {
-            dropArea.classList.remove('drag-over');
-        }
+    function unhighlight() {
+        dropArea.classList.remove('drag-over');
+    }
 
-        function handleDrop(e) {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            handleFiles(files);
-        }
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        handleFiles(files);
+    }
 
-        function handleFiles(event) {
-            const files = event.target ? event.target.files : event;
+    function handleFiles(event) {
+        const files = event.target ? event.target.files : event;
 
-            if (files.length > 0) {
-                const file = files[0];
-                if (file.type.startsWith('image/')) {
-                    uploadButton.disabled = false;
-                    uploadButton.textContent = 'Upload ' + file.name;
-                } else {
-                    alert('Please upload a valid image file.');
-                    fileInput.value = '';
-                    uploadButton.disabled = true;
-                    uploadButton.textContent = 'Upload';
-                }
+        if (files.length > 0) {
+            const file = files[0];
+            if (file.type.startsWith('image/')) {
+                uploadButton.disabled = false;
+                uploadButton.textContent = 'Upload ' + file.name;
+            } else {
+                alert('Please upload a valid image file.');
+                fileInput.value = '';
+                uploadButton.disabled = true;
+                uploadButton.textContent = 'Upload';
             }
         }
+    }
 
-        function toggleNav(element) {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('show');
-            element.classList.toggle('active');
-        }
-    </script>
+    function toggleNav(element) {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('show');
+        element.classList.toggle('active');
+    }
+</script>
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/67542cb52480f5b4f5a98535/1iegct9hp';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
 </body>
 </html>

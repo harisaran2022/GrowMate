@@ -169,6 +169,19 @@
             .nav-toggle {
                 display: flex;
             }
+    .nav-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.logo {
+    height: 50px;  /* Fixed height */
+    width: auto;   /* Maintain aspect ratio */
+    object-fit: contain;
+    max-width: 200px;
+}
 
             .nav-links {
                 display: none;
@@ -226,59 +239,73 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="logo">Growmate.tech 🌱</a>
-            <div class="nav-toggle" onclick="toggleNav(this)">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <ul class="nav-links">
-                <li><a href="/" >Home</a></li>
-                <li><a href="/disease-detection"class="active">GrowFix</a></li>
-                <li><a href="/farm-management">GrowPlan</a></li>
-                <li><a href="/chatbot">GrowBot</a></li>
-                <li><a href="/about_us">About Us</a></li>
-            </ul>
-        </div>
-    </nav>
+<nav class="navbar">
+    <div class="nav-container">
+        <header class="nav-logo">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Growmate Logo" class="logo">
+</header>
 
-    <main class="results-container">
-        <h1 class="results-title">{{ page_title }}</h1>
-        {% if image_url %}
+        <div class="nav-toggle" onclick="toggleNav(this)">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/disease-detection" class="active">GrowFix</a></li>
+            <li><a href="/farm-management">GrowPlan</a></li>
+            <li><a href="/chatbot">GrowBot</a></li>
+            <li><a href="/about_us">About Us</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="results-container">
+    <h1 class="results-title">{{ page_title }}</h1>
+    {% if image_url %}
         <img src="{{ image_url }}" alt="Uploaded Image">
-        {% endif %}
-        {% if result %}
+    {% endif %}
+    {% if result %}
         <p><strong>Prediction:</strong> {{ result.prediction }}</p>
         <p><strong>Confidence:</strong> {{ result.confidence|round(2) }}%</p>
-        {% endif %}
-        {% if recommendation %}
+    {% endif %}
+    {% if recommendation %}
         <h2>Farm Management Recommendations</h2>
         <div class="markdown-content">
             {{ recommendation | safe }}
         </div>
-        {% endif %}
-        {% if gemini_analysis %}
+    {% endif %}
+    {% if gemini_analysis %}
         <h2>GrowMate Analysis</h2>
         <div class="markdown-content">
             {{ gemini_analysis | safe }}
         </div>
-        {% endif %}
-    </main>
+    {% endif %}
+</main>
 
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 Growmate - Your AI Partner for Sustainable Agriculture 🌱</p>
-        </div>
-    </footer>
+<footer>
+    <div class="footer-content">
+        <p>&copy; 2024 Growmate - Your AI Partner for Sustainable Agriculture 🌱</p>
+    </div>
+</footer>
 
-    <script>
-        function toggleNav(element) {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('show');
-            element.classList.toggle('active');
-        }
-    </script>
+<script>
+    function toggleNav(element) {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('show');
+        element.classList.toggle('active');
+    }
+</script>
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/67542cb52480f5b4f5a98535/1iegct9hp';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
 </body>
 </html>

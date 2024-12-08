@@ -243,6 +243,21 @@
                 display: flex;
             }
 
+            .nav-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.logo {
+    height: 50px;  /* Fixed height */
+    width: auto;   /* Maintain aspect ratio */
+    object-fit: contain;
+    max-width: 200px;
+}
+
+
             .nav-links {
                 display: none;
                 position: absolute;
@@ -309,9 +324,11 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="logo">Growmate</a>
+<nav class="navbar">
+    <div class="nav-container">
+        <header class="nav-logo">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Growmate Logo" class="logo">
+</header>
             <button class="nav-toggle" aria-label="Toggle navigation">
                 <div></div>
                 <div></div>
@@ -324,77 +341,78 @@
                 <li><a href="/chatbot" class="active">GrowBot</a></li>
                 <li><a href="/about_us">About Us</a></li>
                 {% if session.logged_in %}
-                <li><a href="/logout">Log Out</a></li>
-            {% else %}
-                <li><a href="/login">Log In</a></li>
-                <li><a href="/signup">Sign Up</a></li>
-            {% endif %}
+                    <li><a href="/logout">Log Out</a></li>
+                {% else %}
+                    <li><a href="/login">Log In</a></li>
+                    <li><a href="/signup">Sign Up</a></li>
+                {% endif %}
             </ul>
+    </div>
+</nav>
+
+<main class="main-container">
+    <div class="content">
+        <div class="content-header">
+            <h1>AI-Powered Farming Assistant</h1>
+            <p class="intro">Get instant answers to your farming questions! Our AI assistant is always here to help,
+                whether you need advice on crop care, disease prevention, or farm management tips.</p>
         </div>
-    </nav>
 
-    <main class="main-container">
-        <div class="content">
-            <div class="content-header">
-                <h1>AI-Powered Farming Assistant</h1>
-                <p class="intro">Get instant answers to your farming questions! Our AI assistant is always here to help, whether you need advice on crop care, disease prevention, or farm management tips.</p>
-            </div>
-
-            <div class="chat-container">
-                <div id="chatMessages" class="chat-messages"></div>
-                <form id="chatForm" class="chat-input">
-                    <input type="text" id="userInput" placeholder="Type your farming question here..." required>
-                    <button type="submit">Send Message</button>
-                </form>
-            </div>
+        <div class="chat-container">
+            <div id="chatMessages" class="chat-messages"></div>
+            <form id="chatForm" class="chat-input">
+                <input type="text" id="userInput" placeholder="Type your farming question here..." required>
+                <button type="submit">Send Message</button>
+            </form>
         </div>
-    </main>
+    </div>
+</main>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Growmate. All rights reserved.</p>
-        </div>
-    </footer>
+<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2024 Growmate. All rights reserved.</p>
+    </div>
+</footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script>
-        const chatForm = document.getElementById('chatForm');
-        const chatMessages = document.getElementById('chatMessages');
-        const userInput = document.getElementById('userInput');
-        const navToggle = document.querySelector('.nav-toggle');
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+    const chatForm = document.getElementById('chatForm');
+    const chatMessages = document.getElementById('chatMessages');
+    const userInput = document.getElementById('userInput');
+    const navToggle = document.querySelector('.nav-toggle');
 
-        navToggle.addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('show');
-            this.classList.toggle('active');
-        });
+    navToggle.addEventListener('click', function () {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('show');
+        this.classList.toggle('active');
+    });
 
-        chatForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const message = userInput.value.trim();
-            if (message) {
-                addMessage('user', message);
-                fetchBotReply(message);
-                userInput.value = '';
-            }
-        });
-
-        function addMessage(sender, text) {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('message', `${sender}-message`);
-            messageDiv.innerHTML = marked.parse(text);
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+    chatForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const message = userInput.value.trim();
+        if (message) {
+            addMessage('user', message);
+            fetchBotReply(message);
+            userInput.value = '';
         }
+    });
 
-        function fetchBotReply(message) {
-            fetch('/chatbot', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `message=${encodeURIComponent(message)}`
-            })
+    function addMessage(sender, text) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', `${sender}-message`);
+        messageDiv.innerHTML = marked.parse(text);
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function fetchBotReply(message) {
+        fetch('/chatbot', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `message=${encodeURIComponent(message)}`
+        })
             .then(response => response.json())
             .then(data => {
                 addMessage('bot', data.response);
@@ -403,7 +421,18 @@
                 console.error('Error:', error);
                 addMessage('bot', 'Sorry, I encountered an error while processing your request.');
             });
-        }
-    </script>
+    }
+</script>
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/67542cb52480f5b4f5a98535/1iegct9hp';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
 </body>
 </html>

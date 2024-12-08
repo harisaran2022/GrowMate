@@ -148,10 +148,10 @@ def farm_management():
     """Handle farm management recommendations."""
     if request.method == 'POST':
         area = request.form.get('area')
-        water_content = request.form.get('water_content')
+        Soil_test_result = request.form.get('Soil_test_result')
         location = request.form.get('location')
         language = request.form.get('language')
-        recommendation = get_farm_recommendations(area, water_content, language, location)
+        recommendation = get_farm_recommendations(area, Soil_test_result, language, location)
         # Convert recommendation to HTML using markdown
         recommendation_html = markdown.markdown(recommendation)
 
@@ -159,11 +159,11 @@ def farm_management():
     return render_template('farm_management.html')
 
 
-def get_farm_recommendations(area, water_content, language, location):
+def get_farm_recommendations(area, Soil_test_result, language, location):
     """Get farm recommendations using the Gemini API."""
     prompt = (
         f"Provide farm management recommendations for an area of {area} in acre, "
-        f"with {water_content} water moisture level, located in {location}. "
+        f"with {Soil_test_result} Soil Test result, located in {location}. "
         f"Include crop suggestions and basic care instructions. Reply in {language} "
         f"with all new features. Also, provide important points and methods of "
         f"division of crops. Always reply like you're a bot called Growmate."

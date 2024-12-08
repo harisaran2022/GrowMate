@@ -243,6 +243,20 @@
                 box-shadow: var(--shadow);
             }
 
+            .nav-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.logo {
+    height: 50px;  /* Fixed height */
+    width: auto;   /* Maintain aspect ratio */
+    object-fit: contain;
+    max-width: 200px;
+}
+
             .nav-links.show {
                 display: flex;
             }
@@ -319,27 +333,27 @@
 <body>
 <nav class="navbar">
     <div class="nav-container">
-        <a href="/" class="logo">
-            Growmate
-        </a>
-        <div class="nav-toggle" onclick="toggleNav(this)">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/disease-detection">GrowFix</a></li>
-            <li><a href="/farm-management" class="active">GrowPlan</a></li>
-            <li><a href="/chatbot">GrowBot</a></li>
-            <li><a href="/about_us">About Us</a></li>
-            {% if session.logged_in %}
-            <li><a href="/logout">Log Out</a></li>
-            {% else %}
-            <li><a href="/login">Log In</a></li>
-            <li><a href="/signup">Sign Up</a></li>
-            {% endif %}
-        </ul>
+        <header class="nav-logo">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Growmate Logo" class="logo">
+</header>
+            <div class="nav-toggle" onclick="toggleNav(this)">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/disease-detection">GrowFix</a></li>
+                <li><a href="/farm-management" class="active">GrowPlan</a></li>
+                <li><a href="/chatbot">GrowBot</a></li>
+                <li><a href="/about_us">About Us</a></li>
+                {% if session.logged_in %}
+                    <li><a href="/logout">Log Out</a></li>
+                {% else %}
+                    <li><a href="/login">Log In</a></li>
+                    <li><a href="/signup">Sign Up</a></li>
+                {% endif %}
+            </ul>
     </div>
 </nav>
 
@@ -350,12 +364,12 @@
     <form id="farmManagementForm" method="POST">
         <div class="form-group">
             <label for="area">Farm Area (in acres):</label>
-            <input type="number" id="area" name="area" required min="0" step="0.1" placeholder="Enter farm area">
+            <input type="number" id="area" name="area" required min="0.1" step="0.1" placeholder="Enter farm area">
         </div>
         <div class="form-group">
-            <label for="water_content">Water Moisture level:</label>
-            <select id="water_content" name="water_content" required>
-                <option value="">Select Water Moisture level</option>
+            <label for="Soil_test_result">Soil test result</label>
+            <select id="Soil_test_result" name="Soil_test_result" required>
+                <option value="">Soil test Result value</option>
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
                 <option value="high">High</option>
@@ -424,13 +438,16 @@
             <input type="text" id="location" name="location" required placeholder="Enter farm location">
         </div>
         <button type="submit" class="btn">Get Recommendations</button>
+        <div class="signup-link">
+            Don't have your soil test? <a href="https://forms.gle/qXYZXgLnSBSW8hZA6">Explore growlabs</a>
+        </div>
     </form>
 
     {% if recommendation %}
-    <div class="result">
-        <h2>Farm Management Recommendations</h2>
-        <p>{{ recommendation | safe }}</p>
-    </div>
+        <div class="result">
+            <h2>Farm Management Recommendations</h2>
+            <p>{{ recommendation | safe }}</p>
+        </div>
     {% endif %}
 </main>
 
