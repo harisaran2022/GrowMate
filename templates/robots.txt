@@ -1,0 +1,14 @@
+# Allow all search engines to crawl the entire site
+User-agent: *
+Disallow: /admin/
+Disallow: /login/
+Disallow: /checkout/
+Disallow: /cart/
+
+# Allow specific search engines
+User-agent: Googlebot
+Disallow: /private/
+Allow: /public/
+
+# Sitemap location (this helps search engines find your sitemap)
+Sitemap: https://www.growmate.tech/sitemap.xml
