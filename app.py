@@ -240,17 +240,21 @@ def analyze():
 def about_us():
     return render_template('about_us.html')
 
+def robots():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'robots.txt')
 
 @app.route('/sitemap.xml')
 def sitemap():
-    return send_from_directory('static', 'sitemap.xml')
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
+# Custom 500 error handler
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('error.html'), 505
 
-
-# Serve robots.txt
-@app.route('/robots.txt')
-def robots():
-    return send_from_directory('static', 'robots.txt')
-
+@app.errorhandler(404)
+def page_not_found(e):
+    # Render the custom 404 page
+        return render_template('error.html'), 404
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5000)), debug=False)
