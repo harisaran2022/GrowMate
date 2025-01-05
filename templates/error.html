@@ -2,52 +2,449 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found - Growmate </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='Growmatelogo_favicon.png') }}">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="Page not found - Growmate">
+    <meta name="theme-color" content="#2EA043">
+    <title>Page Not Found | Growmate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --brand-green: #2EA043;
+            --dark-green: #216E2E;
+            --light-green: #3FB950;
+            --accent-green: #DAFBE1;
+            --black: #1B1F24;
+            --dark-gray: #2D333B;
+            --light-gray: #F6F8FA;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --container-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--black);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: var(--black);
+            box-shadow: var(--shadow);
+            padding: 0.8rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            z-index: 1001;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            max-width: 160px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus {
+            background: var(--brand-green);
+            color: var(--white);
+            outline: none;
+        }
+
+        .nav-links .login-btn {
+            background: var(--brand-green);
+        }
+
+        .nav-links .signup-btn {
+            background: transparent;
+            border: 2px solid var(--brand-green);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            background: transparent;
+            border: none;
+            z-index: 1001;
+        }
+
+        .nav-toggle div {
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
         .error-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            margin-top: 76px;
+        }
+
+        .error-content {
+            max-width: 600px;
             text-align: center;
-            padding: 50px 0;
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--light-green);
+            animation: fadeIn 0.5s ease;
+            width: 100%;
         }
-        .error-code {
-            font-size: 120px;
-            color: #3498db;
-            margin-bottom: 20px;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
+        .farmer-animation {
+            width: 240px;
+            height: 240px;
+            margin: 0 auto 2rem;
+            background: var(--accent-green);
+            border-radius: 50%;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .error-title {
+            font-size: clamp(3rem, 8vw, 4rem);
+            color: var(--brand-green);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .error-subtitle {
+            font-size: clamp(1.25rem, 4vw, 1.5rem);
+            color: var(--black);
+            margin-bottom: 1.25rem;
+        }
+
         .error-message {
-            font-size: 24px;
-            margin-bottom: 30px;
+            color: var(--dark-gray);
+            margin-bottom: 2rem;
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .home-button, 
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 1.5rem;
+            background: var(--brand-green);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 1rem;
+            gap: 0.5rem;
+            min-width: 160px;
+        }
+
+        .back-button {
+            background: transparent;
+            border: 2px solid var(--brand-green);
+            color: var(--brand-green);
+        }
+
+        .home-button:hover,
+        .home-button:focus {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(46, 160, 67, 0.2);
+            outline: none;
+        }
+
+        .back-button:hover,
+        .back-button:focus {
+            background: var(--accent-green);
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        footer {
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 1.5rem 1rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .search-form {
+            max-width: 400px;
+            margin: 0 auto 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--light-green);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            margin-bottom: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--brand-green);
+            box-shadow: 0 0 0 3px var(--accent-green);
+        }
+
+        @media (hover: hover) {
+            .nav-links a:hover {
+                transform: translateY(-2px);
+            }
+        }
+
+        @media (max-width: 968px) {
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--black);
+                flex-direction: column;
+                justify-content: center;
+                padding: 2rem;
+                gap: 1.5rem;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .nav-links.show {
+                display: flex;
+                opacity: 1;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+                padding: 0.75rem 1.5rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-toggle.active div:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .nav-toggle.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active div:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            body.nav-open {
+                overflow: hidden;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .farmer-animation {
+                width: 180px;
+                height: 180px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .home-button, 
+            .back-button {
+                width: 100%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <a href="/" class="logo">Growmate  🌱</a>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/disease-detection">Disease Detection </a></li>
-                <li><a href="/farm-management" >Farm Management </a></li>
-                <li><a href="/chatbot">AI Assistant </a></li>
-                <li><a href="/about_us">About Us </a></li>
+    <nav class="navbar" role="navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="Growmate Home">
+                <img src="/api/placeholder/160/40" alt="Growmate Logo" class="logo">
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <div></div>
+                <div></div>
+                <div></div>
+            </button>
+            <ul class="nav-links" role="menu">
+                <li><a href="/" role="menuitem">Home</a></li>
+                <li><a href="/disease-detection" role="menuitem">GrowFix</a></li>
+                <li><a href="/farm-management" role="menuitem">GrowPlan</a></li>
+                <li><a href="/chatbot" role="menuitem">GrowBot</a></li>
+                <li><a href="/about_us" role="menuitem">About Us</a></li>
+                <li><a href="/login" class="login-btn" role="menuitem">Log In</a></li>
+                <li><a href="/signup" class="signup-btn" role="menuitem">Sign Up</a></li>
             </ul>
         </div>
     </nav>
 
-    <main class="error-container">
-        <div class="error-code">404</div>
-        <p class="error-message">Better move out!! your on Wrong place.</p>
-        <p><a href="/">Go back to Home</a></p>
+    <main class="error-container" role="main">
+        <div class="error-content">
+            <div class="farmer-animation" role="img" aria-label="Animated farmer illustration">
+                <svg width="160" height="160" viewBox="0 0 800 600" aria-hidden="true">
+                    <g fill="#216E2E">
+                        <path d="M400 150 C380 150 350 180 350 220 L450 220 C450 180 420 150 400 150Z"/>
+                        <circle cx="400" cy="250" r="40"/>
+                        <rect x="370" y="290" width="60" height="100"/>
+                        <rect x="370" y="390" width="20" height="60"/>
+                        <rect x="410" y="390" width="20" height="60"/>
+                        <rect x="340" y="320" width="30" height="60" transform="rotate(-30 340 320)"/>
+                        <rect x="430" y="320" width="30" height="60" transform="rotate(30 430 320)"/>
+                        <rect x="320" y="280" width="160" height="20"/>
+                        <path d="M320 270 L280 230 M320 290 L280 330" stroke="#216E2E" stroke-width="10"/>
+                    </g>
+                </svg>
+            </div>
+            <h1 class="error-title">404</h1>
+            <h2 class="error-subtitle">Looks Like This Field is Empty!</h2>
+            <p class="error-message">
+                Our farmer couldn't find what you're looking for. 
+                The page might have been moved, harvested, or never planted in the first place.
+            </p>
+            <form class="search-form" action="/search" method="GET" role="search">
+                <input type="search" 
+                       class="search-input" 
+                       placeholder="Search Growmate..." 
+                       aria-label="Search website"
+                       name="q">
+            </form>
+            <div class="button-group">
+                <a href="/" class="home-button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    Return Home
+                </a>
+                <button onclick="window.history.back()" class="back-button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"/>
+                        <polyline points="12 19 5 12 12 5"/>
+                    </svg>
+                    Go Back
+                </button>
+            </div>
+        </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Growmate Solutions. All rights reserved.</p>
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <p>&copy; 2024 Growmate. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        // Mobile navigation toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+            navToggle.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
