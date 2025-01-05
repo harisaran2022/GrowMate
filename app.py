@@ -241,7 +241,7 @@ def about_us():
     return render_template('about_us.html')
 
 def robots():
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'robots.txt')
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'Robots.txt')
 
 @app.route('/sitemap.xml')
 def sitemap():
