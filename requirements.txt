@@ -7,4 +7,4 @@ markdown
 numpy
 psycopg_binary
 postgres
-postgresql
+
