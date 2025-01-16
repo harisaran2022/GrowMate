@@ -5,3 +5,5 @@ Pillow
 tensorflow
 markdown
 numpy
+psycopg2-binary
+psycopg2
