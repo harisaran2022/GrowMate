@@ -6,4 +6,5 @@ tensorflow
 markdown
 numpy
 psycopg_binary
-psycopg2
+postgres
+postgresql
