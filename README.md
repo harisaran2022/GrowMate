@@ -1,6 +1,6 @@
 # GrowMate
 
-GrowMate is an AI-powered farming solution designed to assist farmers in optimizing their agricultural practices. This Flask-based web application integrates advanced features such as plant disease detection and farm management tools to enhance productivity and sustainability. ([growmate.tech](https://growmate.tech/?utm_source=chatgpt.com))
+Growmate is an AI-powered farming solution designed to assist farmers in optimizing their agricultural practices. This Flask-based web application integrates advanced features such as plant disease detection and farm management tools to enhance productivity and sustainability. ([growmate.tech](https://growmate.tech/?utm_source=chatgpt.com))
 
 ## Features
 
@@ -81,6 +81,7 @@ This project is licensed under the GNU General Public License v3.0. See the [LIC
 ## Acknowledgements
 
 Special thanks to the developers and contributors of the open-source libraries and APIs utilized in this project.
+and sparkworks to help to help developing this project
 
 ---
 
